@@ -1,6 +1,6 @@
 .container {
     width: 500px;
-    height: 500px;
+    height: 600px;
     background-color: gray;
     top: 0;
     right: 0;
@@ -16,4 +16,30 @@
 
 .lbl{
     color: white;
+}
+
+.slide-container{
+    width: 350px;
+    height: 350px;
+    position: relative;
+    background-color: red;
+    top: 10px;
+    margin: auto;
+}
+
+.stats{
+    width: 300px;
+    height: 100px;
+    background-color: green;
+    margin: auto;
+    position: relative;
+}
+
+.min-fuerza{
+    width: 300px;
+    height: 50px;
+    background-color: yellowgreen;
+    margin: auto;
+    position: relative;
+    top: 10px;
 }
