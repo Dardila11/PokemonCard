@@ -92,15 +92,43 @@ $pokemones[7] = new Pokemon(7, 'Dragonite',134,80,3, array("Dragon","Flying"),'d
 $pokemones[8] = new Pokemon(8, 'Nidoqueen',92,76,3, array("Poison","Ground"),'nidoqueen.png');
 $pokemones[9] = new Pokemon(9, 'Articuno',85,85,"Sin linea evolutiva", array("Ice","Flying"),'articuno.png');
 
-$poke = $pokemones[0];
-if(isset($_GET["pokemones"])){
-    $n = $_GET["pokemones"];
-    if($n < count($pokemones)){
-        $poke = $pokemones[$n];
+$tipos = [
+    0 => "Normal",1 => "Fire",2 => "Water",3 => "Grass",4 => "Electric",5 => "Ice",6 => "Fighting",
+    7 => "Poison",8 => "Ground",9 => "Flying",10 => "Psychic",11 => "Bug",12 => "Rock",13 => "Ghost",
+    14 => "Dark",15 => "Dragon",16 => "Steel",17 => "Fairy" 
+];
+
+
+if(isset($_GET["pokemonTipo"])){
+    $pokemonType = $_GET['pokemonTipo'];
+    $typeName = $tipos[$pokemonType];
+    // Creamos un array donde guardaremos los pokemones de un tipo en particular
+    $pokemon_array = array();
+    // Por cada pokemon, validamos si es del tipo que necesitamos
+    for ($i=0; $i < count($pokemones); $i++) {
+        $poke = $pokemones[$i];
+        $pokeArray = $poke->getTipo();
+        for ($j=0; $j < count($pokeArray); $j++) { 
+            // Si el tipo del pokemon es igual al tipo que necesitamos
+            if($pokeArray[$j] == $typeName){
+                // Agregamos el nuevo pokemon al array de pokemones
+                array_push($pokemon_array, $poke);
+            }
+        }
+    }
+    if(count($pokemon_array) == 0){
+        echo "No hay pokemones de ese tipo: " . $typeName;
     }else{
-        echo "Error, el numero dado no ha sido encontrado";
+        for ($i=0; $i < count($pokemon_array) ; $i++) { 
+            echo $pokemon_array[$i]->getNombre();
+            echo "\n";
+            echo $pokemon_array[$i]->getFuerza();
+            echo "\n";
+        }
     }
 }else{
     echo "Error, el numero de Pokemon no especificado";
 }
+
+
 ?>
